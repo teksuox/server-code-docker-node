@@ -1,6 +1,6 @@
 # code-server-container
 
-Este proyecto contiene un contenedor de desarrollo que incluye code-server, permitiendo el uso de un entorno de desarrollo basado en la web.
+Este proyecto contiene un contenedor de desarrollo que incluye code-server, node y docker in docker, permitiendo el uso de un entorno de desarrollo basado en la web.
 
 ## Estructura del Proyecto
 
@@ -19,7 +19,3 @@ Este proyecto contiene un contenedor de desarrollo que incluye code-server, perm
 ## Uso
 
 Una vez que el contenedor esté en funcionamiento, puedes acceder a code-server a través de tu navegador web. La URL y el puerto se especificarán en la configuración de `docker-compose.yml`.
-
-## Contribuciones
-
-Las contribuciones son bienvenidas. Si deseas mejorar este proyecto, por favor abre un issue o un pull request.
