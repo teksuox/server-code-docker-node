@@ -1,0 +1,16 @@
+{
+  "name": "Code Server Container",
+  "dockerFile": "../Dockerfile",
+  "context": "..",
+  "appPort": [8080],
+  "extensions": [
+    "ms-python.python",
+    "esbenp.prettier-vscode",
+    "ms-vscode.cpptools",
+    "dbaeumer.vscode-eslint"
+  ],
+  "settings": {
+    "terminal.integrated.shell.linux": "/bin/bash"
+  },
+  "postCreateCommand": "code-server --install-extension ms-python.python"
+}

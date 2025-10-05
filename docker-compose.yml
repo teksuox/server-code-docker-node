@@ -1,0 +1,49 @@
+version: '3.8'
+
+services:
+  code-server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./workspace:/home/coder/project
+      - code-server-data:/home/coder
+      # Montar el volumen del socket compartido
+      - docker-socket:/var/run
+    environment:
+      # Apuntar el CLI de Docker al socket compartido
+      - DOCKER_HOST=unix:///var/run/docker.sock
+    networks:
+      - code-server-network
+    depends_on:
+      dind:
+        condition: service_healthy
+
+  dind:
+    image: docker:dind
+    privileged: true
+    # Eliminar el 'command' para usar el punto de entrada por defecto de la imagen
+    networks:
+      - code-server-network
+    volumes:
+      - docker-data:/var/lib/docker
+      # Montar el volumen del socket compartido
+      - docker-socket:/var/run
+    healthcheck:
+      # El healthcheck ahora usará el socket por defecto, es más fiable
+      test: ["CMD", "docker", "info"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+networks:
+  code-server-network:
+    driver: bridge
+
+volumes:
+  code-server-data:
+  docker-data:
+  # Definir el volumen para el socket
+  docker-socket:
